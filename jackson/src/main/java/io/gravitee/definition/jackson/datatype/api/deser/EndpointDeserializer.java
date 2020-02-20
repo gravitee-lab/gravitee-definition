@@ -37,7 +37,7 @@ public abstract class EndpointDeserializer<T extends Endpoint> extends StdScalar
         super(vc);
     }
 
-    protected void deserialize(T endpoint, JsonParser jsonParser, JsonNode node, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+    protected void deserialize(Endpoint endpoint, JsonParser jp, JsonNode node, DeserializationContext ctxt) throws IOException, JsonProcessingException {
         final JsonNode weightNode = node.get("weight");
         if (weightNode != null) {
             int weight = weightNode.asInt(Endpoint.DEFAULT_WEIGHT);

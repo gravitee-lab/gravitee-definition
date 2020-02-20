@@ -16,29 +16,18 @@
 package io.gravitee.definition.jackson.datatype.api.deser.endpoint;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
-import io.gravitee.common.http.HttpHeaders;
-import io.gravitee.definition.jackson.datatype.api.deser.EndpointDeserializer;
-import io.gravitee.definition.model.HttpClientOptions;
-import io.gravitee.definition.model.HttpClientSslOptions;
-import io.gravitee.definition.model.HttpProxy;
-import io.gravitee.definition.model.endpoint.HttpEndpoint;
-import io.gravitee.definition.model.services.healthcheck.EndpointHealthCheckService;
+import io.gravitee.definition.model.endpoint.Http2Endpoint;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-import static java.lang.Boolean.FALSE;
 
 /**
  * @author David BRASSELY (david.brassely at graviteesource.com)
  * @author GraviteeSource Team
  */
-public class HttpEndpointDeserializer<T extends HttpEndpoint> extends EndpointDeserializer<T> {
-    public HttpEndpointDeserializer(Class<T> vc) {
+public class Http2EndpointDeserializer<T extends Http2Endpoint> extends HttpEndpointDeserializer<T> {
+    public Http2EndpointDeserializer(Class<T> vc) {
         super(vc);
     }
 
@@ -62,9 +51,10 @@ public class HttpEndpointDeserializer<T extends HttpEndpoint> extends EndpointDe
             throw ctxt.mappingException("Endpoint target is required");
         }
 
-        HttpEndpoint endpoint = new HttpEndpoint(name, target);
+        Http2Endpoint endpoint = new Http2Endpoint(name, target);
         deserialize(endpoint, jp, node, ctxt);
 
+        /*
         JsonNode healthcheckNode = node.get("healthcheck");
         if (healthcheckNode != null && healthcheckNode.isObject()) {
             EndpointHealthCheckService healthCheckService = healthcheckNode.traverse(jp.getCodec()).readValueAs(EndpointHealthCheckService.class);
@@ -115,6 +105,7 @@ public class HttpEndpointDeserializer<T extends HttpEndpoint> extends EndpointDe
                 }
             }
         }
+         */
 
         return (T) endpoint;
     }

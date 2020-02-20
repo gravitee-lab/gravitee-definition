@@ -13,25 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.gravitee.definition.model;
+package io.gravitee.definition.model.endpoint;
+
+import io.gravitee.definition.model.EndpointType;
 
 /**
  * @author David BRASSELY (david.brassely at graviteesource.com)
  * @author GraviteeSource Team
  */
-public enum EndpointType {
+public class Http2Endpoint extends HttpEndpoint {
 
-    HTTP("http"),
-    HTTP2("http2"),
-    GRPC("grpc");
-
-    private final String name;
-
-    EndpointType(String name) {
-        this.name = name;
+    public Http2Endpoint(String name, String target) {
+        this(EndpointType.HTTP2, name, target);
     }
 
-    public String typeName() {
-        return this.name;
+    Http2Endpoint(EndpointType type, String name, String target) {
+        super(type, name, target);
     }
 }
